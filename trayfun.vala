@@ -18,13 +18,9 @@ public class TrayFun {
 	
 	public static void reco(string time) {
 		TrayFun.indicator.set_status(IndicatorStatus.ATTENTION);
-		string ex = "~/ffmpeg-2.2.4/ffmpeg -f x11grab -s 1920x1080 -r 10 -t " + time + " -i :0.0 -c:v libvpx -b:v 1M -y ~/Desktop/mydesktop.webm";
+		string ex = "~/ffmpeg-2.2.4/ffmpeg -f x11grab -s 1920x1080 -r 10 -t " + time + " -i :0.0 -c:v libvpx -r 24 -qscale 0 -b:v 1M -y ~/Desktop/mydesktop.webm";
 		Posix.stdout.printf ("Exec:: %s\n", ex);
-		try{
-			Posix.system(ex);
-		}catch(Error e){
-			Posix.stdout.printf ("Err:: Could not execute command.\n");
-		}
+		Posix.system(ex);
 		TrayFun.indicator.set_status(IndicatorStatus.ACTIVE);
 	}
 
