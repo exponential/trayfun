@@ -47,7 +47,6 @@ public class TrayFun {
 		item.activate.connect(() => {
 				TrayFun.reco("5");
 		});
-		//item.activate.connect(this.reco(5));
 		item.show();
 		menu.append(item);
 
@@ -56,7 +55,6 @@ public class TrayFun {
 		item.activate.connect(() => {
 				TrayFun.reco("10");
 		});
-		//item.activate.connect(TrayFun.reco(10));
 		menu.append(item);
 		
 		item = new Gtk.MenuItem.with_label("Exit");
@@ -64,12 +62,10 @@ public class TrayFun {
 		item.activate.connect(() => {
 				win.destroy();
 		});
-		//item.activate.connect(TrayFun.reco(10));
 		menu.append(item);
 
 		indicator.set_menu(menu);
 
-		//win.show_all();
 		win.hide();
 
 		Gtk.main();
