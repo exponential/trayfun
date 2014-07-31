@@ -35,8 +35,7 @@ public class TrayFun {
 		var label = new Gtk.Label("Hello, world!");
 		win.add(label);
 
-		TrayFun.indicator = new Indicator(win.title, "face-glasses",
-									  IndicatorCategory.APPLICATION_STATUS);
+		TrayFun.indicator = new Indicator(win.title, "face-glasses", IndicatorCategory.APPLICATION_STATUS);
 
 		TrayFun.indicator.set_status(IndicatorStatus.ACTIVE);
 		TrayFun.indicator.set_attention_icon("face-laugh");
@@ -44,24 +43,18 @@ public class TrayFun {
 		var menu = new Gtk.Menu();
 
 		var item = new Gtk.MenuItem.with_label("5 Seconds");
-		item.activate.connect(() => {
-				TrayFun.reco("5");
-		});
+		item.activate.connect(() => { TrayFun.reco("5"); });
 		item.show();
 		menu.append(item);
 
 		item = new Gtk.MenuItem.with_label("10 Seconds");
 		item.show();
-		item.activate.connect(() => {
-				TrayFun.reco("10");
-		});
+		item.activate.connect(() => { TrayFun.reco("10"); });
 		menu.append(item);
 		
 		item = new Gtk.MenuItem.with_label("Exit");
 		item.show();
-		item.activate.connect(() => {
-				win.destroy();
-		});
+		item.activate.connect(() => { win.destroy(); });
 		menu.append(item);
 
 		indicator.set_menu(menu);
