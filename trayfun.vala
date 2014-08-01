@@ -15,10 +15,12 @@ using AppIndicator;
 
 public class TrayFun {
 	public static Indicator indicator = null;
+	public static int s_width = 9001;
+	public static int s_height = 9001;
 	
 	public static void reco(string time) {
 		TrayFun.indicator.set_status(IndicatorStatus.ATTENTION);
-		string ex = "~/ffmpeg-2.2.4/ffmpeg -f x11grab -s 1920x1080 -r 10 -t " + time + " -i :0.0 -c:v libvpx -r 24 -qscale 0 -b:v 1M -y ~/Desktop/mydesktop.webm";
+		string ex = "~/ffmpeg-2.2.4/ffmpeg -f x11grab -s " + TrayFun.s_width.to_string() + "x" + TrayFun.s_height.to_string() + " -r 10 -t " + time + " -i :0.0 -c:v libvpx -r 24 -qscale 0 -b:v 1M -y ~/Desktop/mydesktop.webm";
 		Posix.stdout.printf ("Exec:: %s\n", ex);
 		Posix.system(ex);
 		TrayFun.indicator.set_status(IndicatorStatus.ACTIVE);
@@ -26,6 +28,9 @@ public class TrayFun {
 
 	public static int main(string[] args) {
 		Gtk.init(ref args);
+		
+		TrayFun.s_width = Gdk.Screen.width();
+		TrayFun.s_height = Gdk.Screen.height();
 
 		var win = new Gtk.Window();
 		win.title = "Indicator Test";
