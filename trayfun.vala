@@ -10,6 +10,7 @@
  * 
  */
 
+using GLib;
 using Posix;
 using AppIndicator;
 
@@ -19,8 +20,22 @@ public class TrayFun {
 	public static int s_height = 9001;
 	
 	public static void reco(string time) {
+		int y = 1999;
+		int M = 07;
+		int d = 14;
+		int h = 11;
+		int m = 59;
+		int s = 59;
+		
+		var n = new DateTime.now_local();
+		
+		n.get_ymd(out y,out M,out d);
+		h = n.get_hour();
+		m = n.get_minute();
+		s = n.get_second();
+		
 		TrayFun.indicator.set_status(IndicatorStatus.ATTENTION);
-		string ex = "~/ffmpeg-2.2.4/ffmpeg -f x11grab -s " + TrayFun.s_width.to_string() + "x" + TrayFun.s_height.to_string() + " -r 10 -t " + time + " -i :0.0 -c:v libvpx -r 24 -qscale 0 -b:v 1M -y ~/Desktop/mydesktop.webm";
+		string ex = "~/ffmpeg-2.2.4/ffmpeg -f x11grab -s " + TrayFun.s_width.to_string() + "x" + TrayFun.s_height.to_string() + " -r 10 -t " + time + " -i :0.0 -c:v libvpx -r 24 -qscale 0 -b:v 1M -y ~/Desktop/" + y.to_string() + "-" + M.to_string() + "-" + d.to_string() + "." + h.to_string() + ":" + m.to_string() + ":" + s.to_string() + ".webm";
 		Posix.stdout.printf ("Exec:: %s\n", ex);
 		Posix.system(ex);
 		TrayFun.indicator.set_status(IndicatorStatus.ACTIVE);
